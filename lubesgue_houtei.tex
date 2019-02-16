@@ -1,0 +1,483 @@
+\documentclass[11pt, a4paper, dvipdfmx]{jsarticle}
+    \usepackage{amsmath}
+    \usepackage{amsthm}
+    \usepackage[psamsfonts]{amssymb}
+    \usepackage{color}
+    \usepackage{ascmac}
+    \usepackage{amsfonts}
+    \usepackage{mathrsfs}
+    \usepackage{amssymb}
+    \usepackage{graphicx}
+    \usepackage{fancybox}
+    \usepackage{enumerate}
+    \usepackage{verbatim}
+    \usepackage{subfigure}
+    \usepackage{proof}
+    \usepackage{otf}
+
+  \theoremstyle{definition}
+
+    \newtheorem{Axiom}{公理}[section]
+    \newtheorem{Definition}[Axiom]{定義}
+    \newtheorem{Theorem}[Axiom]{定理}
+    \newtheorem{Proposition}[Axiom]{命題}
+    \newtheorem{Lemma}[Axiom]{補題}
+    \newtheorem{Corollary}[Axiom]{系}
+    \newtheorem{Example}[Axiom]{例}
+    \newtheorem{Claim}[Axiom]{主張}
+    \newtheorem{Property}[Axiom]{性質}
+    \newtheorem{Attention}[Axiom]{注意}
+    \newtheorem{Question}[Axiom]{問}
+    \newtheorem{Problem}[Axiom]{問題}
+    \newtheorem{Consideration}[Axiom]{考察}
+    \newtheorem{Alert}[Axiom]{警告}
+
+    \newtheorem*{Axiom*}{公理}
+    \newtheorem*{Definition*}{定義}
+    \newtheorem*{Theorem*}{定理}
+    \newtheorem*{Proposition*}{命題}
+    \newtheorem*{Lemma*}{補題}
+    \newtheorem*{Example*}{例}
+    \newtheorem*{Corollary*}{系}
+    \newtheorem*{Claim*}{主張}
+    \newtheorem*{Property*}{性質}
+    \newtheorem*{Attention*}{注意}
+    \newtheorem*{Question*}{問}
+    \newtheorem*{Problem*}{問題}
+    \newtheorem*{Consideration*}{考察}
+    \newtheorem*{Alert*}{警告}
+    \renewcommand{\proofname}{\bfseries Proof}
+
+    \newcommand{\A}{\bf 証明}
+    \newcommand{\B}{\it Proof}
+
+
+    \newtheorem{Axiom+}{Axiom}[section]
+    \newtheorem{Definition+}[Axiom+]{Definition}
+    \newtheorem{Theorem+}[Axiom+]{Theorem}
+    \newtheorem{Proposition+}[Axiom+]{Proposition}
+    \newtheorem{Lemma+}[Axiom+]{Lemma}
+    \newtheorem{Example+}[Axiom+]{Example}
+    \newtheorem{Corollary+}[Axiom+]{Corollary}
+    \newtheorem{Claim+}[Axiom+]{Claim}
+    \newtheorem{Property+}[Axiom+]{Property}
+    \newtheorem{Attention+}[Axiom+]{Attention}
+    \newtheorem{Question+}[Axiom+]{Question}
+    \newtheorem{Problem+}[Axiom+]{Problem}
+    \newtheorem{Consideration+}[Axiom+]{Consideration}
+    \newtheorem{Alert+}{Alert}
+    \renewcommand{\proofname}{\bfseries 証明}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\W}{{\cal W}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\Wpm}{W^{\pm}}
+\newcommand{\Wp}{W^{+}}
+\newcommand{\Wm}{W^{-}}
+\newcommand{\p}{\partial}
+\newcommand{\Dx}{D_{x}}
+\newcommand{\Dxi}{D_{\xi}}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\pal}{\parallel}
+\newcommand{\dip}{\displaystyle }
+\newcommand{\e}{\varepsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pphi}{\varphi}
+\newcommand{\ti}{\tilde}
+%付け加えたコマンド
+\newcommand{\F}{\mathcal{F}}
+
+    \title{測度空間}
+    \author{平野　貴稔}
+    \date{2019/01/30}
+\begin{document}
+\maketitle
+\setcounter{section}{0}
+\section{緒言}
+確率論を学ぶ上で，ルベーグ積分を定義しなければならない．ルベーグ積分を定義する上で，
+基本的になってくる，$\sigma-algebra$について学ばなければならないと感じ，今回は
+このトピックを選択した．来年のための準備になれば良いと考えている．
+
+
+
+
+\section{有限加法測度}
+\Definition{有限加法族}\\
+$\F$:空間$X$の族とする．
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\item $\phi \in \F$
+\item $A \in \F\Rightarrow A^{c} \in \F$
+\item $A,B \in \F \Rightarrow A \cup B \in \F$
+\end{enumerate}
+このように，$(i),(ii),(iii)$を満たすような$\F$を有限加法族という．\\
+\\
+\begin{itemize}
+\item $X \in \F$ も成り立つ．
+$\because \phi \in \F$ であるため，(ii)より，$\phi^{c} \in \F$\\
+$\therefore \phi^{c} = X-\phi = X \in \F$
+\\
+\item $A \cap B \in \mathbb{F}$も成り立つ．\\
+$\because (A \cap B) = (A^{c} \cup B^{c})^{c} $である．　\\
+よって，(i),(ii)より,$A\cap B \in \F$
+\\
+\item $A - B \in \F$  が成り立つ．\\
+$\because A\cap B^{c} = (A^{c}\cup B)^{c}$であるから
+(i),(ii)より，$A-B = A \cap B^{c} = (A^{c}\cup B)^c \in \F$
+
+\end{itemize}
+
+\Theorem $Z = X \times Y$,$X$の部分集合の族を$\mathbb{G}$,$Y$の部分集合の族$\mathbb{F}$とする．
+また，この$\mathbb{G},mathbb{F}$は有限加法族である．今，$K \in Z$で，
+\begin{center}
+$K = E \times F~ (E \in \mathbb{G},F \in \mathbb{F}) $
+\end{center}
+このように，集合の有限個の直和として表されるもの全体$\mathbb{R}$は，有限加法族となる．\\
+
+\proofname)
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\item $\phi \in \mathbb{G},\phi \in \mathbb{F}$であるため,
+$\phi = \phi \times \phi \in \mathbb{R}$となる．
+
+\item $K = E \times F $ であると仮定する．\\
+$E^{c} = X-E~,~F^{c} = X - F$より，$Z = (E+E^{c}) \times (F+F^{c})$\\
+$Z = (E \times F)+(E^{c} \times F)+(E \times F^{c})+(E^{c} \times F^{c})$\\
+$K^{c} = (E^{c}\times F)+(E \times F^{c})+(E^{c} \times F^{c})$である．
+したがって，$Z = K + K^{c} $. \\$\therefore K^{c} \in \mathbb{R}$
+\\
+\item$A_1,A_2 \in \mathbb{R}$であることを仮定する．$A = A_1+A_2$と置く.
+定義より，$A \in \mathbb{R}$\\
+\\
+次に，$A,B \in \mathbb{R} \Rightarrow A\cap B \in \mathbb{R}$\\
+$A,B \in \mathbb{R}$であることより，次が成り立つ．($K_1,...,K_n,H_1,...,H_m  \in \mathbb{R}$)
+\begin{center}
+  $A = K_1+K_2+K_3+...+K_n$ \\
+  $B = H_1+H_2+H_3+...+H_m$
+\end{center}
+ 今,$K_i\cap H_j\in \mathbb{R}$の形の集合として表され，\\
+（image:区間の共通部分は区間を成す）
+\begin{center}
+  $A \cap B = \sum^{n}_{i=1}(\sum^{m}_{j=1}(K_i \cap H_j))$
+\end{center}
+$\therefore A\cap B \in R$\\
+\\
+最後に，$A,B\in R \Rightarrow A\cup B \in \mathbb{R}$について\\
+$A = K_1+...+K_n$と置く.de Morganの定理より，$A^{c}= K_1^{c}\cap ... \cap K_n^{c}$と表せる．\\
+上で示したことより，$A^{c} \in R$となるので，\\
+$\therefore A\cup B = A+(B \cap A^{c}) \in \mathbb{R}$
+
+\end{enumerate}
+
+\Lemma $(A \cup B) \times (C \cup D) = (A \times B)\cup(A \times D)\cup(B \times C)\cup(B \times D)$\\
+$\because (A \cup B) \times (C \cup D)$\\
+$=\{(x,y)|x \in A \cup B ~and~ y \in C\cup D\} = \{(x,y)|(x\in A ~or~ x \in B) and~(y \in C ~or~ y \in D)\}$\\
+$=\{(x,y)|(x \in A~ and~ y\in C) ~or~(x \in A ~and~ y\in D) ~or~(x \in B ~and~ y\in C) ~or~(x \in B ~and~ y\in D)\}$
+$=(A \times C)\cup(A \times D)\cup(B \times C )\cup(B \times D)$\\
+\\
+\Lemma $K^{c} = (E^{c} \times  F)+(E \times F^{c})+(E^{c} \times F^{c})$
+$\because K^{c} = (E \times F)^{c}$であるから,\\
+~~~~~~~~~~~~~~~~~~~~~$=((X\times Y)- (E \times F))$\\
+~~~~~~~~~~~~~~~~~~~~~$=\{(x,y)|(x,y) \in X \times Y~~and~~(x,y)\notin(E \times F)\}$\\
+~~~~~~~~~~~~~~~~~~~~~$=\{(x,y)|(x \in X~~and~~x \notin E~~and~~y \in Y~~and~~y \in F)~~or~~$\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$(x \in X~~and~~x \in E~~and~~y\in Y~~and~~y \notin F)~~or~~$\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$(x \in X~~and~~x \notin E~~and~y \in Y~~and~~y \notin F)$\}\\
+~~~~~~~~~~~~~~~~~~~~~$=(E^{c} \times F)+(E \times F^{c})+(E^{c} \times F^{c})$\\
+\\
+\begin{itemize}
+  \item 集合関数について\\
+  $F \in \mathbb{F}:$有限加法族であり，$E \subset F,E \in \mathbb{F}$に対して，定義された関数
+  $\Phi(E)$を$F$で定義された$\mathbb{F}-$集合関数という．この関数の取りうる値に関して
+  \begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\item 実数~or~$\pm \infty$
+\item 複素数
+　\end{enumerate}
+\item 区間，区間塊について\\
+$R^{N}$において，$-\infty \leq a_{\mu} < b_{\mu} \leq \infty~(\mu = 1,...,N)$
+に対して，\\
+\begin{center}
+ $I = \{(x_1,x_2,...,x_{N})|a_{\mu}<x_{\mu}\le b_{\mu}\}$\\
+ ~~~$=(a_1,b_1]\times(a_2,b_2]\times...\times(a_{N},b_{N}]$
+\end{center}
+なる形の集合を区間という.\\
+このような区間の有限個の直和を区間塊という．
+\end{itemize}
+\Definition 空間：$X$,$X$とその部分集合の有限加法族：$\F$\\
+今，$m(A)$を$\mathbb{F}-$集合関数とし，次を満たすとき，$m$を$\mathbb{F}$上の有限加法速度
+という．\\
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\item $\forall A \in \F,0 \le m(A) \le \infty,m(\phi)=0$
+\item $\forall A,B \in \F \Rightarrow m(A+B) = m(A)+m(B)$
+\end{enumerate}
+$m$が有限加法測度であるとき，次の性質が成り立つ．
+\begin{itemize}
+  \item 有限加法性\\
+  $A_1,...,A_n \in \mathbb{F},A_j\cap A_k =\phi(j \neq k) \Rightarrow m(\sum_{j=1}^{n}A_j) = \sum_{j=1}^{n}m(A_j)$\\
+  $\because$ 定義1.1.2の(ii)を帰納的に有限個考えれば十分である．\\
+  \item 単調性\\
+  $A,B \in \mathbb{F},B \subset A \Rightarrow m(B)\le m(A)$\\
+  特に$m(B)$が有限であるならば，$M(A-B) = m(A)-m(B)$が成り立つ．\\
+  $\because ~B \subset A$であることより，$A = B \cup (A-B)$と表すことができる．\\
+  今，Aを上記のように表せることから，$B \cap (A-B) = \phi$である．したがって，\\
+  $A = B + (A-B)$である．$m(B + (A - B) )= m(A)$となる．\\
+  $m$が有限加法測度であることより，$m(B)+m(A-B) = m(A)$\\
+  $\therefore m(B) \le m(A)$\\
+  特に，$m(B)$が有限であるならば，実数の性質より，両辺に$-m(B)$を加えると，\\
+  $m(A-B) = m(A) - m(B)$が成り立つ．
+
+  \item 有限劣加法性\\
+  $A_1,...,A_n \in \mathbb{F} \Rightarrow m(\cup_{j =1}^{n}A_j) \le \sum_{j=1}^{n}m(A_j)$\\
+  $\because A_1 = B_1,B_2 = A_1 - A_2,...,B_n = A_n - (\cup_{j=1}^{n-1}A_j)$と置くと，
+  $\cup_{j=1}^{n}A_j = \sum_{j=1}^{n}B_j$である．
+  従って，有限加法性，単調性($\forall j ,A_j \subset B_j \Rightarrow \mu(B_j) \le \mu(A_j)$)より\\
+  \begin{center}
+    $\mu(\cup_{j=1}^{n}A_j) = \mu(\sum_{j=1}^{n}B_j) = \sum^{n}_{j=1}\mu(B_j) \le \sum^{n}_{j=1}\mu(A_j)$
+  \end{center}
+  従って，成立つ．\\
+
+\end{itemize}
+
+\Definition{完全加法速度}\\
+$m$が有限加法族$\mathcal{F}$上で完全加法的な測度\\
+$\Leftrightarrow A_1,A_2,... \in \mathcal{F},A_i \cap A_j = \phi(i \neq j)$に対して，\\
+$A = \cup_{n=1}^{\infty}A_n(\sum^{\infty}_{n=1}A_n) \in \mathcal{F} \Rightarrow m(A) = \sum_{n=1}^{\infty}m(A_n)$\\
+\\
+\section{外測度}
+\Definition{外測度}\\
+$\forall A \subset X$について，定義された集合関数$\Gamma(A)$があって，
+次を満たすとき，集合関数$\Gamma$を(Carathedory)外測度という．
+\begin{enumerate}
+  \renewcommand{\labelenumi}{(\roman{enumi})}
+
+  \item $0 \le \Gamma(A) \le \infty,~ \Gamma(\phi) = 0$\\
+
+  \item $A \subset B \Rightarrow \Gamma(A) \le \Gamma(B)$\\
+
+  \item $\Gamma(\cup_{n=1}^{\infty}A_n) \le \sum_{n=1}^{\infty} \Gamma(A_n)$
+
+\end{enumerate}
+ここで，重要な点は，任意の集合$A (\subset X)$に対して定義されていることである．\\
+\\
+\Theorem $\F:X$上の有限加法族，$m:\F$上の有限加法測度であるとする．
+\begin{enumerate}
+  \renewcommand{\labelenumi}{(\roman{enumi})}
+  \item $A \subset \sum_{n=1}^{\infty}E_n$:このような囲い方が1つ存在し，\\
+  $\Gamma(A) = inf \sum_{n=1}^{\infty}m(E_n)$と定義すると，$\Gamma$は外測度となる．
+  \\
+  \item $m$が$\F$上で完全加法的である$\Rightarrow E \in \F ,\Gamma(A) = m(A)$\\
+  (一般的には，$\Gamma(E) \le m(E)$)
+\end{enumerate}
+証明)(i)について
+\begin{itemize}
+  \item $0 \le \Gamma(A) \le \infty,~ \Gamma(\phi) = 0$について\\
+  $m$が有限加法測度であるので，$\forall E_n \in \F$に対して，$0 \le m(E_n) \le \infty$であるので，\\
+  $\Gamma$の定義より，$0 \le \Gamma(A) \le \infty$となる．\\
+  また，$\phi \in \F$であるから，$0 \le \Gamma(\phi) \le m(\phi) = 0$~~$\therefore \Gamma(\phi) = 0$
+  \\
+  \item $A \subset B \Rightarrow \Gamma(A) \le \Gamma(B)$について\\
+  $A \subset B$であると仮定する．今，$B \subset \cup_{n=1}^{\infty}E_n$で，$B$を囲えることができる．\\
+  この時，仮定より~$A \subset \cup_{n=1}^{\infty}E_n$であるので，$\Gamma(A) \le \sum_{n=1}^{\infty}E_n$が成り立つ．\\
+  また，右辺に関して，下限をとることで,$ \Gamma(A) \le \Gamma(B)$ が成り立つ．
+  \\
+  \item  $\Gamma(\cup_{n=1}^{\infty}A_n) \le \sum_{n=1}^{\infty} \Gamma(A_n)$について
+  $\forall \e $をとる．各$A_n$に対して，測度$\Gamma$の定義により，
+  \begin{center}
+  $$A_n \subset \cup_{k=1}^{\infty} E_{n_{k}},~\sum_{k=1}^{\infty}m(E_{n_{k}} \le \Gamma(A)+\frac{\e}{2^n}$$
+  \end{center}
+  を満たすような$E_{n_{k}} \in \F(k = 1,2,...)$がとれる．\\
+  このとき，$\cup_{n=1}^{\infty}A_n \subset \cup_{n=1}^{\infty}\cup_{k=1}^{\infty}E_{n_{k}}$であるから，\\
+　$$\Gamma(\cup_{n=1}^{\infty}A_n) = inf\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}m(E_{n_{k}}) \le \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}m(E_{n_{k}})
+  \le \sum_{n=1}^{\infty}\{\Gamma(A_n) + \frac{\e}{2^n}\} = \sum_{n=1}^{\infty}\Gamma(A_n) + \e
+  $$
+  ここで$\e$は任意であるから，$\Gamma(\cup_{n=le}^{\infty}A_n) \le \sum_{n=1}^{\infty}\Gamma(A_n)$\\
+  したがって，$\Gamma$は外測度である．\\
+  \\
+  (ii)について\\
+  $E \in \F$であることを仮定する．$E \subset E$を$E$の一つの囲い方とすると，
+  外測度$\Gamma$の定義により，$\Gamma(E) \le m(E)$である．\\
+  一方で，$E \subset \cup^{\infty}_{n=1}E_n(E_n \in \F)$なる任意の囲い方
+  に対して，
+　\begin{center}
+  $F_1 = E_1 \cup E~,~F_n = (E_n-\cup^{n-1}_{k=1}E_k) \cap E$
+　\end{center}
+　と$F_n$をおくと，$F_1,...$は，$F_i \cap F_j = \phi(i \neq j)$である．
+  また，$F_n \subset E_n$  で，$F_n \in \F(n \in \N)$で，
+  \begin{center}
+    $E = E \cap (\cup^{\infty}_{n =1}E_n) = \sum^{\infty}_{n=1}F_n~,~E \in \F$
+  \end{center}
+  だから，$m$が$\F$上で完全加法測度であることより，
+  $m(E) = \sum^{\infty}_{n=1}m(F_n) \le \sum^{\infty}_{n=1}m(E_n)$\\
+  ここで，$E$の全ての囲い方に対する，$\sum^{\infty}_{n=1}m(E_n)$の下限を取ることにより
+　$\Gamma(E) \ge m(E)$\\
+  $\therefore \Gamma(E) = m(E)$
+\end{itemize}
+次からは可測性について，定理3.2で定義した$\Gamma$をもとに考えていく．
+\Definition ($\Gamma$-可測)\\
+$\Gamma:X$に定義された外測度とする．$E \subset X$で次の条件を満たすとき，$E$は可測である.
+\begin{center}
+  $\forall A \subset X,~\Gamma(A) = \Gamma(A \cap E) + \Gamma(A \cap E^{c})$
+\end{center}
+
+$\mathcal{M}_r：\Gamma-$可測の全体と書くことにする.定義$2.3$により，次が成り立つ．
+\begin{itemize}
+  \item $E \in \mathcal{M}_r \Rightarrow E^{c} \in \mathcal{M}_r$\\
+  \item $\Gamma(E)=0 \Rightarrow E \in \mathcal{M}_r~$したがって，$\phi \in \mathcal{M}_r$\\
+\end{itemize}
+
+\Definition(零集合)\\
+$\Gamma(E) = 0$を満たすような集合$\Leftrightarrow \{E \in \mathcal{M}_r|\Gamma(E)=0\}$\\
+
+\Theorem$~$定理2.1で構成した外測度$\Gamma$について，次が成り立つ．
+\begin{center}
+  $\F \subset \mathcal{M}_r$
+\end{center}
+(重要なポイント：$\F$に含まれる集合は可測であること)\\
+
+\proofname)$E \in \F$であると仮定する．
+任意の$A \subset X$に対して，$A \subset \cup_{n=1}^{\infty}E_n~,~E_n \in \F(\forall n \in \N)$\\
+を満たすような$E_n$を考えると，
+\begin{center}
+  $A \cap E \subset \cup^{\infty}_{n=1}(E_n \cap E)~,~A \cap E^c \subset \cup^{\infty}_{n=1}(E_n \cap E^c)$
+\end{center}
+が成り立つので，$$\Gamma(A \cap E)+\Gamma(A \cap E^c) \le \sum^{\infty}_{n=1}(E_n\cap E) + \sum^{\infty}_{n=1}(E_n\cap E^c)$$
+となる．
+  また，$E_n = E_n \cap E + E_n \cap E^c (= E \cap (E+E^c))$であることと，$m$の有限加法性より，
+\begin{center}
+  $$\sum^{\infty}_{n=1}m(E_n) = \sum^{\infty}_{n=1}m(E_n \cap E + E_n \cap E^c)
+  = \sum^{\infty}_{n=1}m(E_n \cap E)+\sum^{\infty}_{n=1}m(E_n \cap E^c)$$
+\end{center}
+$$
+\therefore \sum^{\infty}_{n=1}m(E_n) \ge \Gamma(A \cap E)+\Gamma(A \cap E^c)となり，左辺の下限を取ると，
+\Gamma(A) \ge \Gamma(A \cap E)+\Gamma(A \cap E^c)
+$$
+\\
+逆の大小関係については，$E$が可測である，可測でないに関係なく，成り立つため十分である．
+したがって，$E$は可測であるため，$E \in \mathcal{M}_r$となる．\\
+\\
+\Theorem
+$$
+E_k \in \mathcal{M}_r(k = 1,2,3,...), E_i \cap E_j = \phi(i \neq j),~S = \sum^{\infty}_{n=1}E_k
+~\Rightarrow ~S \in \mathcal{M}_r, \Gamma(S) = \sum^{\infty}_{n=1}\Gamma(E_k)
+$$
+\proofname)$\forall A \subset X,\forall n \in \N$に対して，$\Gamma(A)\ge \sum^{n}_{k=1}\Gamma(A\cap E_k)+\Gamma(A\cap S^c)$ \\
+が証明されたと仮定する．$\lim_{k \rightarrow \infty}\sum^{n}_{k=1}(A \cap E_k) = A \cap S$となることと，$\Gamma$の劣加法性より，\\
+\begin{center}
+  $\Gamma(A) \ge \sum^{\infty}_{k=1}\Gamma(A\cap E_k)+\Gamma(A\cap S^c) \ge \Gamma(A\cap S)+\Gamma(A\cap S^c)$
+\end{center}
+したがって，$S \in \mathcal{M}_r$ となる．\\
+~今，$A = S$と置くと，
+\begin{center}
+  $\Gamma(S) \ge \sum^{\infty}_{k=1}(S\cap E_k)+\Gamma(S\cap S^c) \ge \Gamma(S)$
+\end{center}
+($\because S\cap S^c = \phi$で，$\Gamma(\phi) = 0$であるら)\\
+したがって，$\Gamma(S)\ge \sum^{\infty}_{k=1}\Gamma(E_k)\ge \Gamma(S)$となるので，$\sum^{\infty}_{k=1}\Gamma(E_k) = \Gamma(S)$が成り立つ．\\
+\\
+証明されたと仮定したところについて，証明していく．\\
+はじめに，$F_1 \in \mathcal{M}_r$であることを仮定し，$S = F_1$とすると，$\Gamma$の単調性より\\
+\begin{center}
+  $\Gamma(A) = \Gamma(A\cap F_1)+\Gamma(A\cap F_1^c) \ge \Gamma(A\cap S)+\Gamma(A\cap S^c)$
+\end{center}
+よって，$k=1$の時は，示された．\\
+次に，$k=n$まで，上の仮定が成り立っていると仮定すると，
+\begin{center}
+  $\Gamma(A\cap E_{n+1}^c)\ge \sum^{n}_{k=1}\Gamma((A\cap E_{n+1}^c)\cap E_k)+\Gamma((A\cap E_{n+1}^c)\cap S^c)$
+\end{center}
+そして，$\forall n\in \N ~with~ k\le n,S = \sum^{n+1}_{k=1}E_k \Rightarrow E_k \subset E_{n+1}^c~,S^c \subset E_{n+1}^c$である．\\
+よって，$E_{n+1} \in \mathcal{M}_r$であるから($\because~ \Gamma(E_{n+1})= \Gamma(E_{n+1}\cap S)+\Gamma(E_{n+1}\cap S^c)$)，\\
+$\Gamma(A) = \Gamma(A\cap E_{n+1})+\Gamma(A\cap E_{n+1}^c) \ge \Gamma(A\cap E_{n+1})+\sum^{n}_{k=1}\Gamma(A\cap E_k)+\Gamma(A\cap S^c)$
+したがって，$\Gamma(A)\ge \sum^{n+1}_{k=1}\Gamma(A\cap E_k)$となるので，$k = n+1$の時も成り立つ．\\
+
+ 可測であることの定義に対して，次の同値な命題がある．\\
+ \Proposition
+ $E$が可測である.$\Leftrightarrow \forall A_1 \subset E, \forall A_2 \subset E^c,\Gamma(A_1+A_2) = \Gamma(A_1)+\Gamma(A_2)$\\
+ 証明に関しては，省略.\\
+
+\Theorem $E,F\in \mathcal{M}_r,E\cap F\in \mathcal{M}_r,E-F\in \mathcal{M}_r$\\
+\proofname)~ $E\cap F\in \mathcal{M}_r$であることを示していく．\\
+まず，$\forall A_1 \subset E\cap F,\forall A_2 \subset E^c\cup F^c$をとり，
+\begin{center}
+  $B_1 = A_2\cap F, B_2 = A_2\cap F^c\subset F^c$
+\end{center}
+このように，$B_1,B_2$を置く．また，仮定より次が成り立つ．
+\begin{center}
+  $A_1\subset E,B_1=A_2\cap F \subset (E^c\cup F^c)\cap F = (E^c\cap F)\cup(F\cap F^c)\subset E^c$\\
+  $A_1+B_1\subset F, B_2\subset F^c,F\in \mathcal{M}_r$
+\end{center}
+ よって，$\Gamma(A_1)+\Gamma(A_2) = \Gamma(A_1)+\Gamma(B_1)+\Gamma(B_2)$\\
+ ($\because A_2 = B_1+B_2$であり，直和であるから，$\Gamma$の有限加法性より，成り立つ.)\\
+ また，
+\begin{eqnarray*}
+ \Gamma(A_1)+\Gamma(B_1)+\Gamma(B_2) &=& \Gamma(A_1+B_1)+\Gamma(B_2)\\
+  &=&\Gamma(A_1+B_1+B_2)\\
+   &=& \Gamma(A_1+A_2)
+\end{eqnarray*}
+したがって，定理の主張が成り立つ．\\
+差集合$E-F\in \mathcal{M}_r$については，上の主張を用いることで示される．\\
+
+\Corollary $E_k\in \mathcal{M}_r(k = 1,2,...,n)\Rightarrow \cup^{n}_{k=1}E_k,\cap^{n}_{k=1}E_k \in \mathcal{M}_r$\\
+\proofname)~ 仮定から，定理3.8とnに関する数学的帰納法より，$\cap^{n}_{k=1}E_k \in \mathcal{M}_r$である.\\
+また，再び定理3.8より$\cup^{n}_{n=1}E_k = X-\cap^{n}_{k=1}E_k \in \mathcal{M}_r$である．したがって，成り立つ．
+\Theorem $E_n \in \mathcal{M}_r(\forall n\in \N)\Rightarrow \cup^{\infty}_{n=1}E_n \in \mathcal{M}_r$\\
+\proofname)
+\begin{center}
+  $F_1 = E_1,~F_n = E_n-\cup^{n-1}_{k=1}E_k$
+\end{center}
+このように，$F_1,F_n$をおく．定理3.8と系3.9により，$F_n\in \mathcal{M}_r(\forall n\in \N)$\\
+そして，$i \neq j~ \Rightarrow~ F_i\cap F_j = \phi$であり，$\cup^{\infty}_{n=1}E_n = \sum^{\infty}_{n=1}F_n$であるから,
+定理3.6より，$\cup^{\infty}_{n=1}E_n\in \mathcal{M}_r$　したがって，定理が示された．
+
+\section{測度}
+\Definition{$\sigma-algebra$}\\
+空間$X$の部分集合の族$\mathcal{B}$が，次の条件を満たす時，$\mathcal{B}$を$\sigma-algebra$(完全加法族)という．
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+  \item $\phi \in \mathcal{B} $
+  \item $E \in \mathcal{B} ~\Rightarrow~ E^c \in \mathcal{B}$
+  \item $E_n\in \mathcal{B}(\forall n\in \N)~\Rightarrow~ \cup^{\infty}_{n=1}E_n\in \mathcal{B}$
+\end{enumerate}
+この上の3条件から，有限加法族の時と同様に，次が成り立つ．
+\begin{itemize}
+  \item $X \in \mathcal{B}$
+  \item $\mathcal{B}$に含まれる集合の高々可算無限回の集合演算を行っても得られる集合は$\mathcal{B}$に含まれる.
+\end{itemize}
+上を示すのは，前セクションで示した定理により，示される．\\
+また，空間$X$とその部分集合の族$\mathcal{B}$に対して，$\mathcal{B}$-集合関数$\mu(A)$が次を満たす時，$\mu$を$\mathcal{B}$で定義された測度という．
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+ \item $\forall A \in \F,0 \le m(A) \le \infty,m(\phi)=0$
+ \item $A_1,A_2,... \in \mathcal{F},A_i \cap A_j = \phi(i \neq j),\\
+      A = \cup_{n=1}^{\infty}A_n(\sum^{\infty}_{n=1}A_n) \in \mathcal{F} \Rightarrow m(A) = \sum_{n=1}^{\infty}m(A_n)$\\
+\end{enumerate}
+測度に関しても，上の性質から，次が示される．
+\begin{itemize}
+  \item $A,B\in \mathcal{B},A\subset B~\Rightarrow~\mu(A)\le \mu(B)$(単調性)\\
+        特に，$\mu(A)<\infty~\rightarrow~\mu(B-A) = \mu(B)-\mu(A)$\\
+
+  \item $A_n\in \mathcal{B}(\forall n\in \N)~\Rightarrow~\mu(\cup^{\infty}_{n=1}A_n)\le \sum^{\infty}_{n=1}\mu(A_n)$(劣加法性)
+\end{itemize}
+
+\Definition{(測度空間)}\\
+空間$X$とその部分集合の族$\mathcal{B}:\sigma-algebra$,\\
+そして$\mathcal{B}$で定義された測度$\mu$とを組み合わせて考えたもの$(X,\mathcal{B},\mu)$を”測度空間”という．
+
+\Theorem
+$\Gamma$ を空間Xで定義された外測度であるとする．\\また，$\mathcal{M}_r$が$\Gamma-$可測可能な集合全体とすると
+これは，$\sigma-algebra$をなし，$\Gamma$は$\mathcal{M}_r$上で定義された測度となる．\\
+$\because $定義3.3より導かれた二つの性質と定理3.6により，$\mathcal{M}_r$が$\sigma-algebra$である．また，
+$\Gamma$が$\mathcal{M}_r$上の測度であることは，外測度$\Gamma$の定義の1つ目の条件と定理3.6により，測度となる．\\
+\\
+\section{最後に}
+ 今回，測度論の基本的なことを学習して感じたことは，集合論についての知識が全く足りていないことを感じた．
+ 今まで習ってきたことが基本的なことが今後学んでいく数学を理解する上で，とても必要になってくることを再確認
+ できたので，今後も予習だけではなく，基礎の部分に戻って，復習することが必要であると感じれた．
+
+\section{参考文献}
+　数学選書　ルベーグ積分入門(新装版)　伊藤清三　著
+
+
+\end{document}
